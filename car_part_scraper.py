@@ -1,6 +1,7 @@
 from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
@@ -17,16 +18,15 @@ def select_initial_options(driver, year, make_model, part, zip_code):
     """ After initial load, select year, make & model, part, zip code
     """
     # select options
-    select = Select(driver.find_element_by_name('userDate'))
-    select.select_by_visible_text(year)
-    select = Select(driver.find_element_by_name('userModel'))
-    select.select_by_visible_text(make_model)
-    select = Select(driver.find_element_by_name('userPart'))
-    select.select_by_visible_text(part)
-    driver.find_element_by_name('userZip').send_keys(zip_code)
+    driver.find_element(By.NAME, 'userDate').send_keys(year)
+    driver.find_element(By.NAME, 'userModel').send_keys(make_model)
 
-    # click Search
-    driver.find_element_by_name('Search Car Part Inventory').click()
+    driver.find_element(By.NAME, 'userPart').send_keys(part)
+    # driver.find_element(By.NAME, location).send_keys("All States")
+    driver.find_element(By.NAME, 'userZip').send_keys(zip_code)
+    # driver.find_element(By.NAME, zipcode).click()
+    driver.find_element(By.NAME, 'Search Car Part Inventory').click()
+
     logging.info('Initial options selected')
 
 
@@ -35,18 +35,28 @@ def select_trim(driver, trim):
     """
 
     # find radio buttons and their labels
-    radio_buttons = driver.find_elements_by_name('dummyVar')
-    radio_labels = driver.find_elements_by_tag_name('label')
+    # radio_buttons = driver.find_elements_by_name('dummyVar')
+    # radio_labels = driver.find_elements_by_tag_name('label')
 
+    radio_buttons = driver.find_element(By.NAME, 'dummyVar')
+    radio_labels = driver.find_elements(By.TAG_NAME, 'label')
+    count = []
+    print(count)
     # find radio button matching trim
-    for i, label in enumerate(radio_labels):
-        if label.text == trim:
-            count = i
+    for i in radio_labels:
+        print(i.text)
+        if i.text == trim:
+            
+            count = ++1
+            print('count', + count)
+           
             break
     
-    # click radio button, click Search button
-    radio_buttons[count].click()
-    driver.find_element_by_name('Search Car Part Inventory').click()
+    # # click radio button, click Search button
+ 
+    # driver.find_element(By.NAME, trim).click()
+    driver.find_element(By.ID, count).click()
+    driver.find_element(By.NAME, 'Search Car Part Inventory').click()
     logging.info('Found trim and selected')
 
 
@@ -283,7 +293,7 @@ def df_to_excel(rows_list, year, make_model):
 
 def main():
     # retrieve make, model, year, part, location from plugin
-    plugin_name = 'plugins.2016_toyota_camry_console'
+    plugin_name = 'plugins.2007_Infinity_M35_Front_Seat'
     plugin_module = importlib.import_module(plugin_name)
     plugin = plugin_module.Plugin()
     year, make_model, part, zip_code, trim = plugin.return_vars()
@@ -292,8 +302,8 @@ def main():
     # open url
     url = 'https://www.car-part.com/'
     d = Path(__file__).resolve().parent
-    driver_path = d / 'chromedriver.exe'
-    driver = webdriver.Chrome(executable_path=str(driver_path))
+    driver_path = 'chromedriver.exe'
+    driver = webdriver.Chrome(executable_path=driver_path)
     driver.get(url)
 
     # navigate to first results page

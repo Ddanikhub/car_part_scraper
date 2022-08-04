@@ -1,0 +1,34 @@
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Initial options selected
+INFO:root:Found trim and selected
+INFO:root:Pages found
+INFO:root:Beginning scrape of pages
+INFO:root:Successfully scraped all pages
+INFO:root:Initial options selected
+INFO:root:Found trim and selected
+INFO:root:Pages found
+INFO:root:Beginning scrape of pages
+INFO:root:Successfully scraped all pages
+INFO:root:Process is complete. Output created.
